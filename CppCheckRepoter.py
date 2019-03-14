@@ -12,8 +12,8 @@ import sys
 import zipfile
 
 # argv[1] = subject
-# argv[2] = to
-# argv[3] = folder
+# argv[2] = folder
+# argv[3] = to_addr
 
 smtp = smtplib.SMTP( 'mail.techwing.co.kr', 587 )
 smtp.starttls()
@@ -31,7 +31,8 @@ def set_attach_file( _file_path ) :
 	return mime_base
 
 def set_content( _file_path ) :
-	html = open( _file_path, 'rt' ).read()
+	html = 'Cpp Check Report 입니다. 세부사항은 압축파일을 확인해 주세요.'
+	html += open( _file_path, 'rt' ).read()
 	contents = MIMEText( html, 'html' )
 	return contents
 
@@ -39,20 +40,28 @@ def set_content( _file_path ) :
 def zip_folder( _folder_path ) :
 	zip_file_name = _folder_path + '\\CppCheckReport.zip'
 	zip = zipfile.ZipFile( zip_file_name, 'w' )
-	file_list = glob.glob( _folder_path )
+	file_list = glob.glob( _folder_path + '*.*' )
 	for file_path in file_list :
-		zip.write(os.path.join(_folder_path, file_path), file_path, compress_type = zipfile.ZIP_DEFLATED)
+		if file_path.endswith( '.zip' ) == False :
+			zip.write(os.path.join(_folder_path, file_path), file_path, compress_type = zipfile.ZIP_DEFLATED)
 
 	zip.close()
 	return zip_file_name
 
 def main() :
-	msg[ 'Subject' ] = 'test' # sys.argv[1]
-	msg[ 'To' ] = 'wonyong.lee@techwing.co.kr' # sys.argv[2]
-	folder_path = 'C:\CppCheckReport_SLT_MP\SLT_MC\\' # sys.argv[3]
-	
+	msg[ 'Subject' ] = sys.argv[1]
+	folder_path = sys.argv[2] # 'C:\\CppCheckReport_SLT_MP\\SLT_MC\\' # 
 
-	file_list = glob.glob( folder_path )
+	argv_cnt = len( sys.argv )
+	to_addr_list = []
+	for i in range( 3, argv_cnt ) :
+		to_addr_list.append( sys.argv[i] )
+
+	msg[ 'To' ] = ", ".join( to_addr_list ) 
+	msg_to = to_addr_list 
+	
+	
+	file_list = glob.glob( folder_path + '*.*' )
 	for file_path in file_list :
 		if file_path.find( 'index' ) > 0 :
 			msg.attach( set_content( file_path ) )
@@ -61,10 +70,10 @@ def main() :
 	
 	
 	zip_file_name = zip_folder( folder_path )
-	msg.attach( zip_file_name )
+	msg.attach( set_attach_file( zip_file_name ) )
 
 
-	smtp.sendmail( 'wonyong.lee@techwing.co.kr', 'wonyong.lee@techwing.co.kr', msg.as_string() )
+	smtp.sendmail( 'wonyong.lee@techwing.co.kr', msg_to, msg.as_string() )
 	smtp.quit()
 
 

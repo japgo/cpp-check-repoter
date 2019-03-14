@@ -4,14 +4,18 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>bdb90a25-e791-4033-b6dd-70c49b3bf967</ProjectGuid>
-    <ProjectHome>C:\Users\wonyong.lee\Documents\Visual Studio 2015\Projects\PythonApplication6\PythonApplication6\</ProjectHome>
-    <StartupFile>PythonApplication6.py</StartupFile>
+    <ProjectHome>E:\git\cpp-check-repoter\</ProjectHome>
+    <StartupFile>CppCheckRepoter.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>CppCheckRepoter</Name>
-    <RootNamespace>PythonApplication6</RootNamespace>
+    <RootNamespace>CppCheckRepoter</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>test C:\\CppCheckReport_SLT_MP\\SLT_MC\\ wonyong.lee@techwing.co.kr japgo@naver.com</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
