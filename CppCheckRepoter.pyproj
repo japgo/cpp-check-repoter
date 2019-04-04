@@ -14,7 +14,7 @@
     <RootNamespace>CppCheckRepoter</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>test C:\\CppCheckReport_SLT_MP\\SLT_MC\\ wonyong.lee@techwing.co.kr japgo@naver.com</CommandLineArguments>
+    <CommandLineArguments>test C:\\CppCheckReport_SLT_MP\\SLT_MC\\ wonyong.lee@techwing.co.kr japgo@naver.com wonyong.lee@techwing.co.kr japgo@hanmail.net</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
